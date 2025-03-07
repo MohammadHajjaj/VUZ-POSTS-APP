@@ -1,20 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import type { Comment } from '../slices/commentsSlice'
 
-interface Comment {
-  id: number
-  postId: number
-  name: string
-  email: string
-  body: string
-}
-
-export const fetchComments = createAsyncThunk(
+export const fetchComments = createAsyncThunk<Comment[], number>(
   'comments/fetchComments',
-  async (postId: number) => {
-    const response = await axios.get<Comment[]>(
-      `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
-    )
-    return response.data
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+      )
+      return response.data
+    } catch {
+      return rejectWithValue('Failed to fetch comments')
+    }
   }
 )

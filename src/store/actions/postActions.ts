@@ -1,19 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import type { Post } from '../slices/postsSlice'
 
-interface Post {
-  id: number
-  userId: number
-  title: string
-  body: string
-}
-
-export const fetchPosts = createAsyncThunk(
+export const fetchPosts = createAsyncThunk<Post[], number>(
   'posts/fetchPosts',
-  async (userId: number) => {
-    const response = await axios.get<Post[]>(
-      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
-    )
-    return response.data
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+      )
+      return response.data
+    } catch {
+      return rejectWithValue('Failed to fetch posts')
+    }
   }
 )

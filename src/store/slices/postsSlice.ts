@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchPosts } from '../actions/postActions'
 
-interface Post {
+export interface Post {
   id: number
   userId: number
   title: string
@@ -9,13 +9,13 @@ interface Post {
 }
 
 interface PostsState {
-  posts: Post[]
+  posts: Record<number, Post[]>
   loading: boolean
   error: string | null
 }
 
 const initialState: PostsState = {
-  posts: [],
+  posts: {},
   loading: false,
   error: null,
 }
@@ -32,7 +32,7 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false
-        state.posts = action.payload
+        state.posts[action.meta.arg] = action.payload
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false

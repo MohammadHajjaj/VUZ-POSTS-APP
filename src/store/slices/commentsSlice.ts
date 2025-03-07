@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchComments } from '../actions/commentActions'
 
-interface Comment {
+export interface Comment {
   id: number
   postId: number
   name: string
@@ -10,13 +10,13 @@ interface Comment {
 }
 
 interface CommentsState {
-  comments: Comment[]
+  comments: Record<number, Comment[]>
   loading: boolean
   error: string | null
 }
 
 const initialState: CommentsState = {
-  comments: [],
+  comments: {},
   loading: false,
   error: null,
 }
@@ -33,7 +33,7 @@ const commentsSlice = createSlice({
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.loading = false
-        state.comments = action.payload
+        state.comments[action.meta.arg] = action.payload
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.loading = false
