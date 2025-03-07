@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../store/hooks'
-import type { User } from '../store/slices/userSlice'
+import { useAppSelector } from '../../store/hooks'
+import type { User } from '../../store/slices/userSlice'
 import debounce from 'lodash.debounce'
 
 export default function UserList() {
@@ -35,7 +35,7 @@ export default function UserList() {
       <ul>
         {filteredUsers.map((user: User) => (
           <li key={user.id}>
-            <Link to={`/users/${user.id}`}>{user.name}</Link>
+            <Link to={`/users/${user.id}/posts`}>{user.name}</Link>{' '}
           </li>
         ))}
       </ul>
