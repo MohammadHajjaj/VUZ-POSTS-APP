@@ -6,7 +6,6 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  eslintPluginPrettierRecommended,
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
@@ -16,7 +15,16 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-no-target-blank': 'off',
-      'prettier/prettier': 'error',
+      'prettier/prettier': [
+        'error',
+        {},
+        {
+          semi: true,
+          singleQuote: true,
+          trailingComma: 'es5',
+        },
+      ],
     },
   },
+  eslintPluginPrettierRecommended,
 ]
