@@ -1,13 +1,16 @@
 .comments-container {
-  padding: 10px;
-  background: #fff;
-  border-radius: 5px;
+  padding: 15px;
+  background: #333;
+  border-radius: 8px;
   margin-top: 15px;
+  max-height: 250px;
+  overflow-y: auto;
+}
 
-  h4 {
-    margin: 0;
-    color: #444;
-  }
+h4 {
+  color: #f1f1f1;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
 }
 
 .comments-list {
@@ -16,19 +19,24 @@
 }
 
 .comment-card {
-  background: #f1f1f1;
+  background: #3a3a3a;
   padding: 10px;
-  margin-top: 5px;
+  margin-top: 8px;
   border-radius: 5px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 
   strong {
     display: block;
-    color: #222;
+    color: #f39c12;
+  }
+
+  .comment-email {
+    font-size: 0.9em;
+    color: #bbb;
   }
 
   p {
-    color: #555;
+    color: #ddd;
     margin: 5px 0 0;
   }
 }
