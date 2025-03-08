@@ -11,7 +11,11 @@ interface Props {
 
 export default function PostComments({ postId }: Props) {
   const dispatch = useAppDispatch()
-  const { comments, loading, error } = useAppSelector((state) => state.comments)
+  const {
+    comments = {},
+    loading,
+    error,
+  } = useAppSelector((state) => state.comments)
   const [visibleComments, setVisibleComments] = useState<number>(3)
 
   useEffect(() => {
